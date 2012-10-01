@@ -1,0 +1,203 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>
+      POLI333C
+    </title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+            function getPartySupporters(party) {
+            $.ajax({
+                type: "GET",
+                url: "pine.arts.ubc.ca/test/auth/ajax/get_votes.php?party="+party,
+    //            data: {token: token, votes: votes},
+                dataType: "json",
+                success: function(data) {
+                if (false == data) { 
+                    $('#annotation-view').css('display', 'none');
+                    console.log("if (false)");
+                } else {
+                    $('#annotation-view').css('display', 'block');
+                    console.log("if (true)");
+                }
+                console.log("data " + data);
+                },
+                error: function (request, status, error) {
+                    console.log("ERROR! request.status: " + request.status);
+                },
+                async: true 
+            });
+        }
+    $(document).ready(function(){
+        $("#id_form").submit(function() {
+            drawChart();
+            return false;
+        });
+
+        $("#support_form").submit(function() {
+            getPartySupporters($("#support").val());
+            drawChart();
+            return false;
+        });
+
+
+
+        var partyCount = 5;
+        var partySupporters;
+        for (i=1;i<=partyCount;i++) {
+            partySupporters = getPartySupporters(i);
+            // now highlight the party supporters
+        }
+//        getPartySupporters(2);
+
+        $("#target").submit(function() {
+            parties[0] = parseInt($("#x1").val());
+            parties[1] = parseInt($("#y1").val());
+            parties[2] = parseInt($("#x2").val());
+            parties[3] = parseInt($("#y2").val());
+            parties[4] = parseInt($("#x3").val());
+            parties[5] = parseInt($("#y3").val());
+            parties[6] = parseInt($("#x4").val());
+            parties[7] = parseInt($("#y4").val());
+            parties[8] = parseInt($("#x5").val());
+            parties[9] = parseInt($("#y5").val());
+            drawChart();
+            return false;
+        });
+    });
+
+
+
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+
+    var myObj = {
+  "ID":["g7sekxhdk68jrkd","6ff8u6xjke73m6e","m8hq32nrrvbqcbz","xwfk84cdbguhvwc","imbh8s4th8tmcja","w9uwzn6xsqasrzz","b7e64ds8bjwjbnj","36bm8y6gmtgws55","gu5haehm43sanw6","5uag4q2ba35njts","rsfsgwckcxrujnm","pkgbhg386x3s35y","xbbwe68ggybpdph","hmnkmcpsw4sduy6","bxgp9rbskv5mev8","2vath5mbgk4qkwe","ytd9fk8k2tdhp6m","m9zrtay6kcz3r9h","6dsvmm4tdy3jsg9","uanbps685h7f4u4","6qwuywyud2mgg5a","agghuv8bv99fcxk","6e2mqi4rq8pszqv","5v2kk3k8tc453ff","xaae2gqyjjf2kz5","dyhs7bx4vhh2j47","ryt65viw3ugydsm","xm3gbzcpk67k6vb","a8hzedufrjiyqki","p46t7dhj3dykusm","6mhzdskppjq2akw","j56zter46cyaxd5","tqusbmbxz3dqvwg","4m6uzrsh4cmawdv","c7y5vc4bsu9fete","xg6n4s37h72fymb","jx3qhk5gk6hnxtd","evsqdyggsynjjz4","85snjmgfzfdfdqw","qwk4pjannzbzn9t","s64frqrfgnh9zc8","dxmuwzkgp92daby","dtp9z6wg4t4fhu8","72mwzrqpwum548v","9n549qeqvfiht38","mazkgmmq5z66rnx","bdyf75snnuzmeud","d35uixqr9kyhzbe","agghuv8bv99fcxk","6mhzdskppjq2akw","az8fu86kp9wbitp","fn6ka8dbeuhe9gz","bwa3jsa4k3ybknm","si7ypgtu9ui58it","a28ez5xbvvd7cd6","qprz6up65y89ks2","67kx37i5zw43guh","9rx2dgmtwk992ky","4jtqdpqy6d77rfg","5ahe6vjcczbmppa","w3i744xc6he5tzs","g36kjfz2234sbqp","jggesciynwcd3wv","22wgeptxmguxtwu","m2ua8263zxcr8hf","q4xkicac9vs3tjy","9kri5kjqvhgtmbt","ddbs9jpn5juszx4","u53c5vqqetbdjut","58vyyyi525zfra5","pftg5h7nafhy42u"],
+  "X":[9.212654,-0.9194255,-5.378926,-5.88399,3.009769,4.978683,0.279707,1.25847,-1.368942,2.18453,-8.877431,0.8996257,-1.566792,1.54926,-8.696548,-6.624268,0.6552439,-2.439301,0.5342219,2.254382,-4.113114,1.208384,7.790021,0.1184246,1.437847,5.481916,-2.478504,8.243822,-6.481747,4.14108,2.87048,0.4420039,1.429528,1.813843,-1.676182,-0.3887494,-1.769168,-3.564468,-1.195412,-2.276095,-1.456758,2.318259,-1.492044,3.852493,-3.326367,-6.095271,-0.746409,3.156065,-3.020473,-1.435605,2.406842,-9.274441,-7.230882,4.445317,6.293844,4.2851,0.4591316,9.232358,-0.8919737,-4.900927,8.378263,-1.051353,0.84,-2.34,10,1.03,-5,-3.86,-9.67,-1.27,2.61],
+  "Y":[6.372721,-9.962177,0.2478236,1.513095,-7.237262,4.311188,0.1972232,3.078586,0.0710281,5.016668,-3.17021,-3.449855,0.4846549,3.065315,4.783361,-2.117164,2.28386,3.002848,-2.452236,-0.1964619,1.818916,5.225099,3.331491,3.850702,-0.417959,5.819121,-0.9717151,4.927132,7.27776,-7.832608,-2.014378,-3.216334,-2.717053,2.281753,0.9019876,-2.187998,-0.0088178,0.9711658,1.181467,1.177864,-5.406858,2.657838,-5.354757,3.406427,-1.675543,2.814581,2.525813,-5.811813,3.986549,-0.5145819,-7.559166,1.62554,-4.573181,-7.35569,5.350585,-6.238662,-6.72648,1.618205,0.1147003,1.909465,5.612803,-5.646376,-7.59,0.85,-4.19,-4.59,-2.35,-2.95,-1.79,-7.73,-1.02],
+  "PARTIES":[7, 1,    // Party 1 (Can present party values here)
+             4, -3,    // Party 2
+             -5, -6,    // Party 3
+             -2, 8,    // Party 4
+             1, 2]
+  };
+    var ids = myObj.ID;
+    x = myObj.X;
+    y = myObj.Y;
+    var ID;
+    var parties = myObj.PARTIES
+       
+    var partySize = 12;
+    
+    function getSupport() {
+        return parseInt($("#support").val());
+    }
+   
+    function setID() {
+        return $("#user_id").val();
+    }
+    
+    function setParties() {
+        return $("#target").val();
+    }
+    
+    function drawChart() {
+        var i;
+        var supportParty = 0;
+        supporters = new Array();
+        
+        if (getSupport() != 0) {
+            supporters = getPartySupporters(supportParty);  // array of party supporters
+            if (supporters != null) {
+                supportParty = getSupport();
+            }
+        }
+        
+        var id = setID();
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'X');              // Column for x location
+        data.addColumn('number', 'Class');          // y for class series
+        data.addColumn('number', 'You Are Here');   // y for login user
+        
+        for (i=1; i<=parties.length/2; i++) {       // create y for each Party
+        data.addColumn('number', 'Party '+i.toString());
+        }
+        
+        for (var j=0; j<parties.length; j+=2) {     // for each party
+            var party = new Array();
+
+            for (i=0; i<=2+parties.length/2; i++) {       // for each column in table
+                if (i==0) party[0] = parties[j];    // set x coord
+                else if (i == j/2+3) party[i] = parties[j+1]; // set y coord
+                else party[i] = null;               // set all else to null
+            }
+            data.addRow(party);
+        }
+
+
+        for (var i=0; i < ids.length; i++) {
+            if (ids[i]==id) {                       // id series
+                data.addRow([x[i], , y[i], , , , , null])
+            } else if (supportParty != 0) {
+                for (var j=0; j < supporters.length; j++) {
+                    if (ids[i] == supporters[j]) {
+                        data.addRow([x[i], , y[i], , , , , null])
+                    }
+                }
+            }                              // rest of class
+                data.addRow([x[i], y[i], , , , , , null])
+            
+        }
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 650, height: 600,
+                          chartArea: {width: 350, height: 350},
+                          title: 'Voter locations',
+                          hAxis: {title: "Economic scale", minValue: -10, maxValue: 10},
+                          vAxis: {title: "Social scale", minValue: -10, maxValue: 10},
+                          series: {0:{color:'#AAAAAA', visibleInLegend: false}, 
+                                   1:{color:'#111111', pointSize:partySize-2},
+                                   2:{pointSize:partySize, visibleInLegend: true}, //set visibleInLegend to false
+                                   3:{pointSize:partySize, visibleInLegend: true}, //when Party is not running
+                                   4:{pointSize:partySize, visibleInLegend: true},
+                                   5:{pointSize:partySize, visibleInLegend: true},
+                                   6:{pointSize:partySize, visibleInLegend: true},
+                                   7:{pointSize:partySize, visibleInLegend: false},
+                                   8:{color:'#dc3912', pointSize:partySize, visibleInLegend: false},
+                                   9:{pointSize:partySize, visibleInLegend: false},
+                                   10:{color:'#993311',pointSize:partySize, visibleInLegend: false},
+                                   11:{pointSize:partySize, visibleInLegend: false},
+                                  }
+                         });
+        }
+
+    </script>
+</head>
+<body>
+	<div id="chart_div"></div>
+    <form id="id_form" action="" method="get">
+    <p style="font-family:verdana;">ID: <input name="user ID" id="user_id" type="text" value="xwfk84cdbguhvwc" size="20" maxlength="40">
+        <input type="submit" value="Update User" /></form></p>
+    <form id="support_form" action="" method="get">
+    <p style="font-family:verdana;">Display supporters for party #: <input name="Party Support" id="support" type="text" value="0" size="2" maxlength="2">
+        <input type="submit" value="Show Data" /></form></p>
+    <form id="target" action="" method="get">
+   <p style="font-family:verdana;"> 
+    Party 1:   x <input name="x1" id="x1" type="text" value="7" size="4" maxlength="4">
+               y <input name="y1" id="y1" type="text" value="1" size="4" maxlength="4"> </br>
+    Party 2:   x <input name="x2" id="x2" type="text" value="4" size="4" maxlength="4">
+               y <input name="y2" id="y2" type="text" value="-3" size="4" maxlength="4"> </br>
+    Party 3:   x <input name="x3" id="x3" type="text" value="-5" size="4" maxlength="4">
+               y <input name="y3" id="y3" type="text" value="-6" size="4" maxlength="4"> </br>
+    Party 4:   x <input name="x4" id="x4" type="text" value="-2" size="4" maxlength="4">
+               y <input name="y4" id="y4" type="text" value="8" size="4" maxlength="4"> </br>
+    Party 5:   x <input name="x5" id="x5" type="text" value="1" size="4" maxlength="4">
+               y <input name="y5" id="y5" type="text" value="2" size="4" maxlength="4"> </br>
+
+                   <input type="submit" value="Move Parties" />
+                   </form> </p>
+
+</body>
+</html>
